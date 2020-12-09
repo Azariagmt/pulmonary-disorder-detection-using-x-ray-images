@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% block content %}
 
-<h3>Hello! upload x-ray image below</h3>
 
-<div>
+<div class="col-sm-6 col-md-6">
+    <h3>Hello! upload x-ray image below</h3>
     <form id="upload-file" method="post" enctype="multipart/form-data">
         <label for="imageUpload" class="upload-label container">
             Choose...
@@ -26,6 +26,10 @@
         <span> </span>
     </h3>
 
+</div>
+
+<div class="col-sm-6 col-md-6" style="background-color: brown;">
+bbaaa
 </div>
 
 {% endblock %}
