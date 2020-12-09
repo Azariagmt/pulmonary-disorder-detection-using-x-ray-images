@@ -2,7 +2,6 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import os
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
-import pandas as pd
 from keras.models import load_model
 import tensorflow as tf # Deep Learning Tool
 import os # OS module in Python provides a way of using operating system dependent functionality
@@ -51,6 +50,7 @@ def upload():
             return 'None'
 
 if __name__ == '__main__':
+    os.environ.setdefault('FLASK_SETTINGS_MODULE', 'web_project.settings')
     port = int(os.environ.get("PORT", 33507))
     app.run(host='0.0.0.0',debug=True, port=port)
 
