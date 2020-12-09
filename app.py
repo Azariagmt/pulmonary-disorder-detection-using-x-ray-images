@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import os
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
+import pandas as pd
 from keras.models import load_model
 import tensorflow as tf # Deep Learning Tool
 import os # OS module in Python provides a way of using operating system dependent functionality
