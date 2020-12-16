@@ -1,7 +1,7 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.8-slim-buster
 
-EXPOSE 80
+EXPOSE 5000
 
 ENV VAR1=10
 # Keeps Python from generating .pyc files in the container
@@ -24,4 +24,4 @@ RUN useradd appuser && chown -R appuser /app
 USER appuser
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["gunicorn", "--bind","--host","0.0.0.0:0", "FLASK_APP=app:app"]
+CMD ["gunicorn", "--bind","--host","0.0.0.0:0","-p", "5000", "FLASK_APP=app:app"]
