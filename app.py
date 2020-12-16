@@ -51,5 +51,6 @@ def upload():
 
 if __name__ == '__main__':
     os.environ.setdefault('FLASK_SETTINGS_MODULE', 'web_project.settings')
-    app.run(host='0.0.0.0', port=80)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0',debug=True)
 
