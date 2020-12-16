@@ -24,4 +24,4 @@ RUN useradd appuser && chown -R appuser /app
 USER appuser
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["gunicorn", "--bind","--host","0.0.0.0:0","-p", "80", "FLASK_APP=app:app"]
+CMD ["gunicorn","--host","0.0.0.0:0","-p", "80", "FLASK_APP=app:app"]
