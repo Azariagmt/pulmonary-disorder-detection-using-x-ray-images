@@ -32,7 +32,8 @@ def model_predict(img_path, model):
 def index():
     return render_template('index.html')
 
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('/predict/binary', methods=['GET', 'POST'])
+@app.route('/predict/multiclass', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         f = request.files['file']
@@ -48,7 +49,7 @@ def upload():
             return '-'
         else:
             return 'None'
-
+            
 if __name__ == '__main__':
     os.environ.setdefault('FLASK_SETTINGS_MODULE', 'flask_covid_project.settings')
     app.run(debug=True)

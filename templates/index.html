@@ -1,37 +1,54 @@
 {% extends "base.html" %} {% block content %}
 
 
-<div class="col-sm-6 col-md-6 float-left">
-    <h3>Hello! upload x-ray image below</h3>
-    <form id="upload-file" method="post" enctype="multipart/form-data">
-        <label for="imageUpload" class="upload-label container">
+<div class="col-sm-12 col-md-6 float-left">
+    <h4>Binary classification model</h4>
+    <form id="upload-file-one" method="post" enctype="multipart/form-data">
+        <label for="imageUploadOne" class="upload-label container">
             Choose...
         </label>
-        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+        <input type="file" name="file" id="imageUploadOne" accept=".png, .jpg, .jpeg">
     </form>
 
-    <div class="image-section container" style="display:none;">
-        <div class="img-preview container">
-            <div id="imagePreview">
+    <div class="image-section-one container" style="display:none;">
+        <div class="img-preview container" style="width: 100%;">
+            <div id="imagePreviewOne" style="width: 100%;">
             </div>
         </div>
         <div>
-            <button type="button" class="btn btn-primary" id="btn-predict">Predict!</button>
+            <button type="button" class="btn btn-primary upload-label" id="btn-predict-one">Predict!</button>
         </div>
     </div>
 
     <div class="loader container" style="display:none;"></div>
-
-
-
-</div>
-
-<div class="col-sm-6 col-md-6 float-right" style="background-color: brown;">
-    <h2>Analysis</h2>
-    <h3 id="result">
+    <h3 id="result-one">
         <span> </span>
     </h3>
 </div>
 
+<div class="col-sm-12 col-md-6 float-right">
+    <h4>Multiclass classification model</h4>
+    <form id="upload-file-two" method="post" enctype="multipart/form-data">
+        <label for="imageUploadTwo" class="upload-label container">
+            Choose...
+        </label>
+        <input type="file" name="file" id="imageUploadTwo" accept=".png, .jpg, .jpeg">
+    </form>
+
+    <div class="image-section-two container" style="display:none;">
+        <div class="img-preview container" style="width: 100%;">
+            <div id="imagePreviewTwo" style="width: 100%;">
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary upload-label" id="btn-predict-two">Predict!</button>
+        </div>
+    </div>
+
+    <div class="loader container" style="display:none;"></div>
+    <h3 id="result-two">
+        <span> </span>
+    </h3>
+</div>
 
 {% endblock %}
