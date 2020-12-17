@@ -50,7 +50,5 @@ def upload():
             return 'None'
 
 if __name__ == '__main__':
-    os.environ.setdefault('FLASK_SETTINGS_MODULE', 'web_project.settings')
-    port = int(os.environ.get("PORT", 80))
-    app.run(host='0.0.0.0',debug=True, port=80)
-
+    os.environ.setdefault('FLASK_SETTINGS_MODULE', 'flask_covid_project.settings')
+    app.run(debug=True)
