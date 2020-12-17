@@ -8,7 +8,7 @@ import tensorflow as tf # Deep Learning Tool
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 # from sklearn.metrics import f1_score
-# from keras.utils.data_utils import get_file
+
 from google_drive_downloader import GoogleDriveDownloader as gdd
 gdd.download_file_from_google_drive(file_id='1MPjc9ljgobj288UbgiteyI5YTB_PIqRW',
     dest_path='./models/modelD.h5',
