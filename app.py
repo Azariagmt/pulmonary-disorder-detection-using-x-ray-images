@@ -3,12 +3,17 @@ from werkzeug.utils import secure_filename
 import os
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
 from keras.models import load_model
+from keras.utils.data_utils import get_file
 import tensorflow as tf # Deep Learning Tool
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 # from sklearn.metrics import f1_score
-
-MODEL_PATH = 'models/covidet.h5'
+# from keras.utils.data_utils import get_file
+from google_drive_downloader import GoogleDriveDownloader as gdd
+gdd.download_file_from_google_drive(file_id='1MPjc9ljgobj288UbgiteyI5YTB_PIqRW',
+    dest_path='./models/modelD.h5',
+)
+MODEL_PATH = 'models/modelD.h5'
 # Load your trained model
 model = load_model(MODEL_PATH)
 
@@ -32,8 +37,8 @@ def model_predict(img_path, model):
 def index():
     return render_template('index.html')
 
-@app.route('/predict/binary', methods=['GET', 'POST'])
-@app.route('/predict/multiclass', methods=['GET', 'POST'])
+@app.route('/predict/binary', endpoint='binary', methods=['GET', 'POST'])
+@app.route('/predict/multiclass', endpoint='multiclass', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         f = request.files['file']
@@ -42,7 +47,11 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        prediction = model_predict(file_path, model)
+        global prediction
+        if request.endpoint == 'binary':
+            prediction = model_predict(file_path, model)
+        elif request.endpoint =='multiclass':
+            prediction = model_predict(file_path, model)
         if (prediction[0] >=0.5):
             return '+'
         elif (prediction[0]<0.5):
