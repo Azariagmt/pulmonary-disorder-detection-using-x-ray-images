@@ -65,8 +65,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<h1>Hello world on Azure!</h1>'
-    
+    return '<h1>Hello Baba on Azure!</h1>'
+
 if __name__ == '__main__':
     os.environ.setdefault('FLASK_SETTINGS_MODULE', 'flask_covid_project.settings')
     app.run(debug=True)
