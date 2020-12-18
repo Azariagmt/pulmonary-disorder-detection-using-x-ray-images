@@ -11,8 +11,9 @@ MODEL_PATH = ''
 def model_from_drive():
     global MODEL_PATH
     # https://drive.google.com/file/d/1-2cRvRkTnWNoGv6pNTAVBiC72-4BoVO0/view?usp=sharing
+    # https://drive.google.com/file/d/18691v06KVU_TsFfN5WceJZ6sDS8tjYaG/view?usp=sharing
     from google_drive_downloader import GoogleDriveDownloader as gdd
-    gdd.download_file_from_google_drive(file_id='1-2cRvRkTnWNoGv6pNTAVBiC72-4BoVO0',
+    gdd.download_file_from_google_drive(file_id='18691v06KVU_TsFfN5WceJZ6sDS8tjYaG',
         dest_path='./model/binary-covid-model-6.h5',
     )
     MODEL_PATH = 'model/binary-covid-model-6.h5'
@@ -21,7 +22,7 @@ def model_from_local():
     global MODEL_PATH
     MODEL_PATH = 'models/binary-covid-model-6.h5'
     
-model_from_local()
+model_from_drive()
 # Load your trained model
 model = load_model(MODEL_PATH)
 
