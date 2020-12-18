@@ -3,17 +3,15 @@ from werkzeug.utils import secure_filename
 import os
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
 from keras.models import load_model
-from keras.utils.data_utils import get_file
 import tensorflow as tf # Deep Learning Tool
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
-# from sklearn.metrics import f1_score
 
-from google_drive_downloader import GoogleDriveDownloader as gdd
-gdd.download_file_from_google_drive(file_id='1MPjc9ljgobj288UbgiteyI5YTB_PIqRW',
-    dest_path='./models/modelD.h5',
-)
-MODEL_PATH = 'models/modelD.h5'
+# from google_drive_downloader import GoogleDriveDownloader as gdd
+# gdd.download_file_from_google_drive(file_id='18691v06KVU_TsFfN5WceJZ6sDS8tjYaG',
+#     dest_path='./models/modelD.h5',
+# )
+MODEL_PATH = 'models/binet.h5'
 # Load your trained model
 model = load_model(MODEL_PATH)
 
