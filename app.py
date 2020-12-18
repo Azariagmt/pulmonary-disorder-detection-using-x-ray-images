@@ -1,11 +1,12 @@
-# from flask import Flask, render_template, request
-# from werkzeug.utils import secure_filename
-# import os
-# import numpy as np # Fundamental package for linear algebra and multidimensional arrays
-# from keras.models import load_model
-# import tensorflow as tf # Deep Learning Tool
-# import os # OS module in Python provides a way of using operating system dependent functionality
+from flask import Flask, render_template, request
+import os
+from werkzeug.utils import secure_filename
+import numpy as np # Fundamental package for linear algebra and multidimensional arrays
+from keras.models import load_model
+import tensorflow as tf # Deep Learning Tool
+import os # OS module in Python provides a way of using operating system dependent functionality
 # import cv2 # Library for image processing
+
 # # https://drive.google.com/file/d/1-2cRvRkTnWNoGv6pNTAVBiC72-4BoVO0/view?usp=sharing
 # from google_drive_downloader import GoogleDriveDownloader as gdd
 # gdd.download_file_from_google_drive(file_id='1-2cRvRkTnWNoGv6pNTAVBiC72-4BoVO0',
@@ -15,7 +16,7 @@
 # # Load your trained model
 # model = load_model(MODEL_PATH)
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
 # def model_predict(img_path, model):
 #     data = [] # initialize an empty numpy array
@@ -31,9 +32,9 @@
 #     print('Prediction: \n', prediction, prediction[0])
 #     return prediction
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 # @app.route('/predict/binary', endpoint='binary', methods=['GET', 'POST'])
 # @app.route('/predict/multiclass', endpoint='multiclass', methods=['GET', 'POST'])
@@ -57,15 +58,6 @@
 #         else:
 #             return 'None'
             
-
-from flask import Flask
-import os
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return '<h1>Hello Baba on Azure!</h1>'
 
 if __name__ == '__main__':
     os.environ.setdefault('FLASK_SETTINGS_MODULE', 'flask_covid_project.settings')
