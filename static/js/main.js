@@ -2,7 +2,8 @@ $(document).ready(function () {
   // Init
   $(".image-section-one").hide();
   $(".image-section-two").hide();
-  $(".loader").hide();
+  $(".loader-one").hide();
+  $(".loader-two").hide();
   $("#result-one").hide();
   $("#result-two").hide();
 
@@ -56,7 +57,7 @@ $(document).ready(function () {
 
     // Show loading animation
     $(this).hide();
-    $(".loader").show();
+    $(".loader-one").show();
 
     // Make prediction by calling api /predict
     $.ajax({
@@ -69,7 +70,7 @@ $(document).ready(function () {
       async: true,
       success: function (data) {
         // Get and display the result
-        $(".loader").hide();
+        $(".loader-one").hide();
         $("#result-one").fadeIn(600);
         console.log("data:", data);
         $("#result-one").text(" Result:  " + data);
@@ -83,7 +84,7 @@ $(document).ready(function () {
 
     // Show loading animation
     $(this).hide();
-    $(".loader").show();
+    $(".loader-two").show();
 
     // Make prediction by calling api /predict
     $.ajax({
@@ -96,7 +97,7 @@ $(document).ready(function () {
       async: true,
       success: function (data) {
         // Get and display the result
-        $(".loader").hide();
+        $(".loader-two").hide();
         $("#result-two").fadeIn(600);
         console.log("data:", data);
         $("#result-two").text(" Result:  " + data);
