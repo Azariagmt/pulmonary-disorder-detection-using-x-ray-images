@@ -1,7 +1,6 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.8-slim-buster
 
-EXPOSE 80
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -23,10 +22,13 @@ RUN apt-get install -y libxrender-dev
 WORKDIR /app
 COPY . /app
 
+EXPOSE 8000
 # Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
 # RUN useradd appuser && chown -R appuser /app
 # USER appuser
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-RUN chmod +x ./entrypoint.sh
-ENTRYPOINT ["sh", "entrypoint.sh"]
+# RUN chmod +x ./entrypoint.sh
+# ENTRYPOINT ["sh", "entrypoint.sh"]
+# start flask app using Gunicorn
+CMD gunicorn -w 4 -b :8000 app:app

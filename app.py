@@ -32,9 +32,9 @@ def model_from_drive():
 
 def model_from_local():
     global MODEL_PATH
-    MODEL_PATH = 'models/covidet.h5'
+    MODEL_PATH = 'models/bin.h5'
     
-model_from_drive()
+model_from_local()
 # Load your trained model
 model = load_model(MODEL_PATH)
 
