@@ -6,7 +6,7 @@
 			"label": "docker-build",
 			"platform": "python",
 			"dockerBuild": {
-				"tag": "finalprojectcovid19detection:latest",
+				"tag": "flaskazure:latest",
 				"dockerfile": "${workspaceFolder}/Dockerfile",
 				"context": "${workspaceFolder}",
 				"pull": true
@@ -31,7 +31,7 @@
 					"--host",
 					"0.0.0.0",
 					"--port",
-					"5000"
+					"8000"
 				],
 				"module": "flask"
 			}
