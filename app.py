@@ -23,7 +23,7 @@ def model_from_local():
     global MODEL_PATH
     MODEL_PATH = 'models/covidet.h5'
     
-model_from_drive()
+model_from_local()
 # Load your trained model
 model = load_model(MODEL_PATH)
 
@@ -71,5 +71,5 @@ def upload():
             
 
 if __name__ == '__main__':
-    os.environ.setdefault('FLASK_SETTINGS_MODULE', 'flask_covid_project.settings')
-    app.run(debug=True)
+    os.environ.setdefault('Flask_SETTINGS_MODULE', 'helloworld.settings')
+    app.run(debug=True, Port=8000)
