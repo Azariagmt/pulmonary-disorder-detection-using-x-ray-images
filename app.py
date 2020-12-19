@@ -19,9 +19,9 @@ def model_from_drive():
     # )
     import gdown
     url = 'https://drive.google.com/uc?id=16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv'
-    output = './model/binary-model.h5'
+    output = 'binary-model.h5'
     gdown.download(url, output, quiet=False)
-    MODEL_PATH = 'model/binary-model-6.h5'
+    MODEL_PATH = 'binary-model.h5'
 
 def model_from_local():
     global MODEL_PATH
