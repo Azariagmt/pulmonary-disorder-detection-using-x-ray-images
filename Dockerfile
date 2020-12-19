@@ -14,6 +14,7 @@ COPY requirements.txt .
 # libraries for opencv
 RUN python -m pip install -r requirements.txt
 RUN python -m pip install googledrivedownloader
+RUN python -m pip install gdown 
 RUN apt-get update
 RUN apt-get -y install libglib2.0-0
 RUN apt install -y libsm6 libxext6

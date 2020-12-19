@@ -13,17 +13,21 @@ def model_from_drive():
     # https://drive.google.com/file/d/1-2cRvRkTnWNoGv6pNTAVBiC72-4BoVO0/view?usp=sharing
     # https://drive.google.com/file/d/18691v06KVU_TsFfN5WceJZ6sDS8tjYaG/view?usp=sharing
     # https://drive.google.com/file/d/16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv/view?usp=sharing
-    from google_drive_downloader import GoogleDriveDownloader as gdd
-    gdd.download_file_from_google_drive(file_id='16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv',
-        dest_path='./model/binary-covid-model-6.h5',
-    )
-    MODEL_PATH = 'model/binary-covid-model-6.h5'
+    # from google_drive_downloader import GoogleDriveDownloader as gdd
+    # gdd.download_file_from_google_drive(file_id='16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv',
+    #     dest_path='./model/binary-covid-model-6.h5',
+    # )
+    import gdown
+    url = 'https://drive.google.com/uc?id=16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv'
+    output = './model/binary-model.h5'
+    gdown.download(url, output, quiet=False)
+    MODEL_PATH = 'model/binary-model-6.h5'
 
 def model_from_local():
     global MODEL_PATH
     MODEL_PATH = 'models/covidet.h5'
     
-model_from_local()
+model_from_drive()
 # Load your trained model
 model = load_model(MODEL_PATH)
 
