@@ -78,5 +78,4 @@ def upload():
           
 if __name__ == '__main__':
     os.environ.setdefault('Flask_SETTINGS_MODULE', 'helloworld.settings')
-    port = int(os.environ.get("PORT", 8000))
-    app.run(debug=True, port=port)
+    app.run(debug=True)
