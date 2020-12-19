@@ -17,11 +17,15 @@ def model_from_drive():
     # gdd.download_file_from_google_drive(file_id='16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv',
     #     dest_path='./model/binary-covid-model-6.h5',
     # )
-    import gdown
-    url = 'https://drive.google.com/uc?id=16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv'
-    output = 'binary-model.h5'
-    gdown.download(url, output, quiet=False)
-    MODEL_PATH = 'binary-model.h5'
+    if (not os.path.isfile('binary-model.h5')):
+        import gdown
+        url = 'https://drive.google.com/uc?id=16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv'
+        output = 'binary-model.h5'
+        gdown.download(url, output, quiet=False)
+        MODEL_PATH = 'binary-model.h5'
+    else: 
+        print('file exists')
+        MODEL_PATH = 'binary-model.h5'
 
 def model_from_local():
     global MODEL_PATH
