@@ -18,9 +18,10 @@ def model_from_drive():
     # gdd.download_file_from_google_drive(file_id='16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv',
     #     dest_path='./model/binary-covid-model-6.h5',
     # )
+    # https://drive.google.com/file/d/18691v06KVU_TsFfN5WceJZ6sDS8tjYaG/view?usp=sharing
     if (not os.path.isfile('binary-model.h5')):
         import gdown
-        url = 'https://drive.google.com/uc?id=16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv'
+        url = 'https://drive.google.com/uc?id=18691v06KVU_TsFfN5WceJZ6sDS8tjYaG'
         output = 'binary-model.h5'
         gdown.download(url, output, quiet=False)
         MODEL_PATH = 'binary-model.h5'
