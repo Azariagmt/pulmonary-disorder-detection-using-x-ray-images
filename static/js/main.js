@@ -22,6 +22,13 @@ $(document).ready(function () {
       reader.readAsDataURL(input.files[0]);
     }
   }
+  $("#imageUploadOne").change(function () {
+    $(".image-section-one").show();
+    $("#btn-predict-one").show();
+    $("#result-one").text("");
+    $("#result-one").hide();
+    readURLone(this);
+  });
   function readURLtwo(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -36,13 +43,7 @@ $(document).ready(function () {
       reader.readAsDataURL(input.files[0]);
     }
   }
-  $("#imageUploadOne").change(function () {
-    $(".image-section-one").show();
-    $("#btn-predict-one").show();
-    $("#result-one").text("");
-    $("#result-one").hide();
-    readURLone(this);
-  });
+
   $("#imageUploadTwo").change(function () {
     $(".image-section-two").show();
     $("#btn-predict-two").show();
@@ -70,7 +71,7 @@ $(document).ready(function () {
       async: true,
       success: function (data) {
         // Get and display the result
-        $(".loader-one").hide();
+        // $(".loader-one").hide();
         $("#result-one").fadeIn(600);
         console.log("data:", data);
         $("#result-one").text(" Result:  " + data);
@@ -97,7 +98,7 @@ $(document).ready(function () {
       async: true,
       success: function (data) {
         // Get and display the result
-        $(".loader-two").hide();
+        // $(".loader-two").hide();
         $("#result-two").fadeIn(600);
         console.log("data:", data);
         $("#result-two").text(" Result:  " + data);

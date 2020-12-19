@@ -6,6 +6,7 @@ import tensorflow as tf # Deep Learning Tool
 from tensorflow.keras.models import load_model
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
+import shutil
 
 MODEL_PATH = ''
 def model_from_drive():
@@ -47,6 +48,7 @@ def model_predict(img_path, model):
     img_array = np.stack((img_array,)*3, axis=-1)
     img_array = np.expand_dims(img_array, axis=0)
     # img_array = np.array(img_array)
+    print('predicted on Array :', img_array)
     prediction = model.predict(img_array)
     print('Prediction: \n', prediction, prediction[0])
     return prediction
@@ -55,8 +57,7 @@ def model_predict(img_path, model):
 def index():
     return render_template('index.html')
 
-@app.route('/predict/binary', endpoint='binary', methods=['GET', 'POST'])
-@app.route('/predict/multiclass', endpoint='multiclass', methods=['GET', 'POST'])
+@app.route('/predict/binary', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         f = request.files['file']
@@ -65,11 +66,7 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        global prediction
-        if request.endpoint == 'binary':
-            prediction = model_predict(file_path, model)
-        elif request.endpoint =='multiclass':
-            prediction = model_predict(file_path, model)
+        prediction = model_predict(file_path, model)
         if (prediction[0] >=0.5):
             return '+'
         elif (prediction[0]<0.5):
@@ -77,7 +74,7 @@ def upload():
         else:
             return 'None'
             
-
 if __name__ == '__main__':
     os.environ.setdefault('Flask_SETTINGS_MODULE', 'helloworld.settings')
-    app.run(debug=True, Port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(debug=True, port=port)
