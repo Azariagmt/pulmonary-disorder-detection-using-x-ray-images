@@ -47,6 +47,7 @@ def model_predict(img_path, model):
     print('Image array shape: \n\n', img_array.shape)
     img_array = np.stack((img_array,)*3, axis=-1)
     img_array = np.expand_dims(img_array, axis=0)
+    print('Image array shape: ', img_array.shape)
     # img_array = np.array(img_array)
     print('predicted on Array :', img_array)
     prediction = model.predict(img_array)
@@ -73,7 +74,7 @@ def upload():
             return '-'
         else:
             return 'None'
-            
+          
 if __name__ == '__main__':
     os.environ.setdefault('Flask_SETTINGS_MODULE', 'helloworld.settings')
     port = int(os.environ.get("PORT", 8000))
