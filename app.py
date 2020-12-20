@@ -80,6 +80,7 @@ def upload():
             return '-'
         else:
             return 'None'
+    return None 
 
 @app.errorhandler(NotFound)
 def page_not_found_handler(e: HTTPException):
