@@ -38,7 +38,7 @@ def model_from_local():
     global MODEL_PATH
     MODEL_PATH = 'models/bin.h5'
     
-model_from_local()
+model_from_drive()
 # Load your trained model
 model = load_model(MODEL_PATH)
 
