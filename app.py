@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
 import tensorflow as tf # Deep Learning Tool
-from tensorflow.keras.models import lo'binary-model.h5'ad_model
+from tensorflow.keras.models import load_model
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 import shutil
