@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
 import tensorflow as tf # Deep Learning Tool
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import lo'binary-model.h5'ad_model
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 import shutil
@@ -20,23 +20,25 @@ def model_from_drive():
     #     dest_path='./model/binary-covid-model-6.h5',
     # )
     # https://drive.google.com/file/d/18691v06KVU_TsFfN5WceJZ6sDS8tjYaG/view?usp=sharing
+    # https://drive.google.com/file/d/1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0/view?usp=sharing
     BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+    print('BASE DIRECTORY============================================',BASE_DIR)
     if (not os.path.exists('{}/binary-model.h5'.format(BASE_DIR))):
         import gdown
-        url = 'https://drive.google.com/uc?id=18691v06KVU_TsFfN5WceJZ6sDS8tjYaG'
+        url = 'https://drive.google.com/uc?id=1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0'
         output = 'binary-model.h5'
         gdown.download(url, output, quiet=False)
         print('downloaded!!!!!!!!!!!!\n\n\n\n\n\n\n=================================================================')
-        MODEL_PATH = 'binary-model.h5'
+        MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
     else: 
-        print('file exists')
-        MODEL_PATH = 'binary-model.h5'
+        print('file exists=================================================================================================')
+        MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
 
 def model_from_local():
     global MODEL_PATH
     MODEL_PATH = 'models/bin.h5'
     
-model_from_drive()
+model_from_local()
 # Load your trained model
 model = load_model(MODEL_PATH)
 
