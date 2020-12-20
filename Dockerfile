@@ -28,9 +28,7 @@ EXPOSE 8000
 # USER appuser
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-# RUN chmod +x ./entrypoint.sh
-# ENTRYPOINT ["sh", "entrypoint.sh"]
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT ["sh", "entrypoint.sh"]
 # start flask app using Gunicorn
 # CMD gunicorn -w 4 -b :8000 app:app
-# start flask app using Gunicorn
-CMD gunicorn -w 4 -b :8000 app:app
