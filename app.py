@@ -26,6 +26,7 @@ def model_from_drive():
         url = 'https://drive.google.com/uc?id=18691v06KVU_TsFfN5WceJZ6sDS8tjYaG'
         output = 'binary-model.h5'
         gdown.download(url, output, quiet=False)
+        print('downloaded!!!!!!!!!!!!\n\n\n\n\n\n\n=================================================================')
         MODEL_PATH = 'binary-model.h5'
     else: 
         print('file exists')
