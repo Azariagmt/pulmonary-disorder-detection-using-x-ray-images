@@ -58,7 +58,6 @@ def model_from_local():
     global BINARY_MODEL_PATH
     BINARY_MODEL_PATH = 'models/bin.h5'
 
-
 app = Flask(__name__)
 
 def model_predict(img_path, model):
@@ -83,7 +82,7 @@ def index():
 
 
 @app.route('/predict/binary', methods=['GET', 'POST'])
-def upload():
+def uploadb():
     if request.method == 'POST':
         f = request.files['file']
         print('f:\n\n  ',f)
@@ -106,7 +105,7 @@ def upload():
 
 CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
 @app.route('/predict/multiclass', methods=['GET', 'POST'])
-def upload():
+def uploadm():
     global CLASS_NAMES
     if request.method == 'POST':
         f = request.files['file']
