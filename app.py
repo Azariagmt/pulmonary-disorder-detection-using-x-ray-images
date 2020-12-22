@@ -24,14 +24,14 @@ def model_from_drive():
         gdown.download(url, output, quiet=False)
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
         print('BINARY MODEL SUCCESS')
-    elif (not os.path.exists('{}/multiclass-model.h5'.format(BASE_DIR))):
+    if (not os.path.exists('{}/multiclass-model.h5'.format(BASE_DIR))):
         url = 'https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt'
         output = 'multiclass-model.h5'
         gdown.download(url, output, quiet=False)
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
         print('MULTICLASS MODEL SUCCESS')
     else:
-        print('file exists=========================================')
+        print('files exist=========================================')
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
 
