@@ -30,7 +30,8 @@ def load_binary_model():
         print('files exist=========================================')
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
     # Load your trained model
-    BINARY_MODEL = load_model(BINARY_MODEL_PATH)
+    with tf.keras.backend.get_session().graph.as_default():
+        BINARY_MODEL = load_model(BINARY_MODEL_PATH)
 
 def load_multiclass_model():
     global MULTICLASS_MODEL_PATH
@@ -47,7 +48,8 @@ def load_multiclass_model():
         print('files exist=========================================')
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
     # Load your trained model
-    MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
+    with tf.keras.backend.get_session().graph.as_default():
+        MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
 
 def model_from_local():
     global BINARY_MODEL_PATH
@@ -87,7 +89,7 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        prediction = model_predict(file_path, binary_model)
+        prediction = model_predict(file_path, BINARY_MODEL)
         if (prediction[0] >=0.5):
             return '+'
         elif (prediction[0]<0.5):
@@ -107,7 +109,7 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        prediction = model_predict(file_path, multiclass_model)
+        prediction = model_predict(file_path, MULTICLASS_MODEL)
         predicted_class_indices  = np.argmax(prediction,axis=1)
         res = CLASS_NAMES[predicted_class_indices[0]]
         return res
