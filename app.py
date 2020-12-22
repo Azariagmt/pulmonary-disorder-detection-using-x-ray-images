@@ -12,10 +12,12 @@ import gdown
 
 BINARY_MODEL_PATH = ''
 MULTICLASS_MODEL_PATH = ''
+BINARY_MODEL = ''
+MULTICLASS_MODEL = ''
 
-def model_from_drive():
+def load_binary_model():
     global BINARY_MODEL_PATH
-    global MULTICLASS_MODEL_PATH
+    global BINARY_MODEL
     BASE_DIR = os.path.dirname(os.path.realpath(__file__))
     print('BASE DIRECTORY : ',BASE_DIR)
     if (not os.path.exists('{}/binary-model.h5'.format(BASE_DIR))):
@@ -24,6 +26,17 @@ def model_from_drive():
         gdown.download(url, output, quiet=False)
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
         print('BINARY MODEL SUCCESS')
+    else:
+        print('files exist=========================================')
+        BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
+    # Load your trained model
+    BINARY_MODEL = load_model(BINARY_MODEL_PATH)
+
+def load_multiclass_model():
+    global MULTICLASS_MODEL_PATH
+    global MULTICLASS_MODEL
+    BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+    print('BASE DIRECTORY : ',BASE_DIR)
     if (not os.path.exists('{}/multiclass-model.h5'.format(BASE_DIR))):
         url = 'https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt'
         output = 'multiclass-model.h5'
@@ -32,17 +45,16 @@ def model_from_drive():
         print('MULTICLASS MODEL SUCCESS')
     else:
         print('files exist=========================================')
-        BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
+    # Load your trained model
+    MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
 
 def model_from_local():
     global BINARY_MODEL_PATH
     BINARY_MODEL_PATH = 'models/bin.h5'
     
-model_from_drive()
-# Load your trained model
-binary_model = load_model(BINARY_MODEL_PATH)
-multiclass_model = load_model(MULTICLASS_MODEL_PATH)
+load_binary_model()
+load_multiclass_model()
 
 app = Flask(__name__)
 
