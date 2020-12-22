@@ -3,60 +3,18 @@ import os
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
-import tensorflow as tf # Deep Learning Tool
+import tensorflow as tf
 from tensorflow.keras.models import load_model
-from keras import backend as K
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 import shutil
 import gdown
+from modules import load_models
 
-BINARY_MODEL_PATH = ''
-MULTICLASS_MODEL_PATH = ''
-BINARY_MODEL = ''
-MULTICLASS_MODEL = ''
 
-def load_binary_model():
-    global BINARY_MODEL_PATH
-    global BINARY_MODEL
-    BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-    print('BASE DIRECTORY : ',BASE_DIR)
-    if (not os.path.exists('{}/binary-model.h5'.format(BASE_DIR))):
-        url = 'https://drive.google.com/uc?id=1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0'
-        output = 'binary-model.h5'
-        gdown.download(url, output, quiet=False)
-        BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
-        print('BINARY MODEL SUCCESS')
-    else:
-        print('Binar model exists=========================================')
-        BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
-    # Load your trained model
-
-    BINARY_MODEL = load_model(BINARY_MODEL_PATH)
-    return BINARY_MODEL
-
-def load_multiclass_model():
-    global MULTICLASS_MODEL_PATH
-    global MULTICLASS_MODEL
-    BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-    print('BASE DIRECTORY : ',BASE_DIR)
-    if (not os.path.exists('{}/multiclass-model.h5'.format(BASE_DIR))):
-        url = 'https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt'
-        output = 'multiclass-model.h5'
-        gdown.download(url, output, quiet=False)
-        MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
-        print('MULTICLASS MODEL SUCCESS')
-    else:
-        print('Multiclass model exist=========================================')
-        MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
-    # Load your trained model
-
-    MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
-    return MULTICLASS_MODEL
-
-def model_from_local():
-    global BINARY_MODEL_PATH
-    BINARY_MODEL_PATH = 'models/bin.h5'
+# def model_from_local():
+#     global BINARY_MODEL_PATH
+#     BINARY_MODEL_PATH = 'models/bin.h5'
 
 app = Flask(__name__)
 
@@ -80,7 +38,6 @@ def model_predict(img_path, model):
 def index():
     return render_template('index.html')
 
-
 @app.route('/predict/binary', methods=['GET', 'POST'])
 def uploadb():
     if request.method == 'POST':
@@ -90,21 +47,15 @@ def uploadb():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        tf.compat.v1.disable_eager_execution()
-        with tf.Graph().as_default():
-            with tf.compat.v1.Session() as sess:
-                tf.compat.v1.keras.backend.set_session(sess)
-                model = load_binary_model()  
-                print('MODEL LOADED')      
-                binary_prediction = model_predict(file_path, model)
-                print(binary_prediction)
-        if (binary_prediction[0] >=0.5):
+        load_models.BINARY_MODEL = load_models.load_binary_model()
+        print('BINARY MODEL LOADED')
+        prediction = model_predict(file_path, load_models.BINARY_MODEL)
+        print('BINARY PREDICTION',prediction)
+        if (prediction[0] >=0.5):
             return '+'
-        elif (binary_prediction[0]<0.5):
+        elif (prediction[0]<0.5):
             return '-'
-        else:
-            return 'None'
-    return None
+    return None 
 
 CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
 @app.route('/predict/multiclass', methods=['GET', 'POST'])
@@ -117,13 +68,8 @@ def uploadm():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        tf.compat.v1.disable_eager_execution()
-        with tf.Graph().as_default():
-            with tf.compat.v1.Session() as sess:
-                tf.compat.v1.keras.backend.set_session(sess)
-                model = load_multiclass_model()        
-                multiclass_prediction = model_predict(file_path, model)
-        multiclass_prediction = model_predict(file_path, MULTICLASS_MODEL)
+        load_models.MULTICLASS_MODEL = load_models.load_multiclass_model()
+        multiclass_prediction = model_predict(file_path, load_models.MULTICLASS_MODEL)
         predicted_class_indices  = np.argmax(multiclass_prediction,axis=1)
         res = CLASS_NAMES[predicted_class_indices[0]]
         return res
