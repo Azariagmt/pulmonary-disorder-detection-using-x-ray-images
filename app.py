@@ -28,7 +28,7 @@ def load_binary_model():
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
         print('BINARY MODEL SUCCESS')
     else:
-        print('files exist=========================================')
+        print('Binar model exists=========================================')
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
     # Load your trained model
 
@@ -47,7 +47,7 @@ def load_multiclass_model():
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
         print('MULTICLASS MODEL SUCCESS')
     else:
-        print('files exist=========================================')
+        print('Multiclass model exist=========================================')
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
     # Load your trained model
 
@@ -90,18 +90,21 @@ def uploadb():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
+        tf.compat.v1.disable_eager_execution()
         with tf.Graph().as_default():
-            with tf.Session() as sess:
-                K.set_session(sess)
-                model = load_binary_model()        
+            with tf.compat.v1.Session() as sess:
+                tf.compat.v1.keras.backend.set_session(sess)
+                model = load_binary_model()  
+                print('MODEL LOADED')      
                 binary_prediction = model_predict(file_path, model)
+                print(binary_prediction)
         if (binary_prediction[0] >=0.5):
             return '+'
         elif (binary_prediction[0]<0.5):
             return '-'
         else:
             return 'None'
-    return None 
+    return None
 
 CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
 @app.route('/predict/multiclass', methods=['GET', 'POST'])
@@ -114,9 +117,10 @@ def uploadm():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
+        tf.compat.v1.disable_eager_execution()
         with tf.Graph().as_default():
-            with tf.Session() as sess:
-                K.set_session(sess)
+            with tf.compat.v1.Session() as sess:
+                tf.compat.v1.keras.backend.set_session(sess)
                 model = load_multiclass_model()        
                 multiclass_prediction = model_predict(file_path, model)
         multiclass_prediction = model_predict(file_path, MULTICLASS_MODEL)
