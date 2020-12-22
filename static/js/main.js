@@ -55,13 +55,12 @@ $(document).ready(function () {
   // Predict
   $("#btn-predict-one").click(function () {
     var form_data = new FormData($("#upload-file-one")[0]);
-
     // Show loading animation
     $(this).hide();
     $(".loader-one").show();
-
     // Make prediction by calling api /predict
     $.ajax({
+      beforeSend: function () {},
       type: "POST",
       url: "/predict/binary",
       data: form_data,
@@ -89,6 +88,7 @@ $(document).ready(function () {
 
     // Make prediction by calling api /predict
     $.ajax({
+      beforeSend: function () {},
       type: "POST",
       url: "/predict/multiclass",
       data: form_data,
@@ -101,7 +101,7 @@ $(document).ready(function () {
         $(".loader-two").hide();
         $("#result-two").fadeIn(600);
         console.log("data:", data);
-        $("#result-two").text(" Result:  " + data);
+        $("#result.two").text(" Result:  " + data);
         console.log("Success!");
       },
     });
