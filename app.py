@@ -5,6 +5,7 @@ from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeo
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
 import tensorflow as tf # Deep Learning Tool
 from tensorflow.keras.models import load_model
+from keras import backend as K
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 import shutil
@@ -30,8 +31,9 @@ def load_binary_model():
         print('files exist=========================================')
         BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
     # Load your trained model
-    with tf.keras.backend.get_session().graph.as_default():
-        BINARY_MODEL = load_model(BINARY_MODEL_PATH)
+
+    BINARY_MODEL = load_model(BINARY_MODEL_PATH)
+    return BINARY_MODEL
 
 def load_multiclass_model():
     global MULTICLASS_MODEL_PATH
@@ -48,15 +50,14 @@ def load_multiclass_model():
         print('files exist=========================================')
         MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
     # Load your trained model
-    with tf.keras.backend.get_session().graph.as_default():
-        MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
+
+    MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
+    return MULTICLASS_MODEL
 
 def model_from_local():
     global BINARY_MODEL_PATH
     BINARY_MODEL_PATH = 'models/bin.h5'
-    
-load_binary_model()
-load_multiclass_model()
+
 
 app = Flask(__name__)
 
@@ -80,6 +81,7 @@ def model_predict(img_path, model):
 def index():
     return render_template('index.html')
 
+
 @app.route('/predict/binary', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -89,16 +91,20 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        prediction = model_predict(file_path, BINARY_MODEL)
-        if (prediction[0] >=0.5):
+        with tf.Graph().as_default():
+            with tf.Session() as sess:
+                K.set_session(sess)
+                model = load_binary_model()        
+                binary_prediction = model_predict(file_path, model)
+        if (binary_prediction[0] >=0.5):
             return '+'
-        elif (prediction[0]<0.5):
+        elif (binary_prediction[0]<0.5):
             return '-'
         else:
             return 'None'
     return None 
 
-CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
+CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']_
 @app.route('/predict/multiclass', methods=['GET', 'POST'])
 def upload():
     global CLASS_NAMES
@@ -109,8 +115,13 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        prediction = model_predict(file_path, MULTICLASS_MODEL)
-        predicted_class_indices  = np.argmax(prediction,axis=1)
+        with tf.Graph().as_default():
+            with tf.Session() as sess:
+                K.set_session(sess)
+                model = load_multiclass_model()        
+                multiclass_prediction = model_predict(file_path, model)
+        multiclass_prediction = model_predict(file_path, MULTICLASS_MODEL)
+        predicted_class_indices  = np.argmax(multiclass_prediction,axis=1)
         res = CLASS_NAMES[predicted_class_indices[0]]
         return res
     return None 
