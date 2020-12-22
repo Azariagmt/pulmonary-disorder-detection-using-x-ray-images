@@ -8,39 +8,41 @@ from tensorflow.keras.models import load_model
 import os # OS module in Python provides a way of using operating system dependent functionality
 import cv2 # Library for image processing
 import shutil
+import gdown
 
-MODEL_PATH = ''
+BINARY_MODEL_PATH = ''
+MULTICLASS_MODEL_PATH = ''
+
 def model_from_drive():
-    global MODEL_PATH
-    # https://drive.google.com/file/d/1-2cRvRkTnWNoGv6pNTAVBiC72-4BoVO0/view?usp=sharing
-    # https://drive.google.com/file/d/18691v06KVU_TsFfN5WceJZ6sDS8tjYaG/view?usp=sharing
-    # https://drive.google.com/file/d/16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv/view?usp=sharing
-    # from google_drive_downloader import GoogleDriveDownloader as gdd
-    # gdd.download_file_from_google_drive(file_id='16Tg8vU7IpB7Xg8hvrAEAsyz8OrjlEQvv',
-    #     dest_path='./model/binary-covid-model-6.h5',
-    # )
-    # https://drive.google.com/file/d/18691v06KVU_TsFfN5WceJZ6sDS8tjYaG/view?usp=sharing
-    # https://drive.google.com/file/d/1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0/view?usp=sharing
+    global BINARY_MODEL_PATH
+    global MULTICLASS_MODEL_PATH
     BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-    print('BASE DIRECTORY============================================',BASE_DIR)
+    print('BASE DIRECTORY : ',BASE_DIR)
     if (not os.path.exists('{}/binary-model.h5'.format(BASE_DIR))):
-        import gdown
         url = 'https://drive.google.com/uc?id=1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0'
         output = 'binary-model.h5'
         gdown.download(url, output, quiet=False)
-        print('downloaded!!!!!!!!!!!!\n\n\n\n\n\n\n=================================================================')
-        MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
-    else: 
-        print('file exists=================================================================================================')
-        MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
+        BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
+        print('BINARY MODEL SUCCESS')
+    elif (not os.path.exists('{}/multiclass-model.h5'.format(BASE_DIR))):
+        url = 'https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt'
+        output = 'multiclass-model.h5'
+        gdown.download(url, output, quiet=False)
+        MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
+        print('MULTICLASS MODEL SUCCESS')
+    else:
+        print('file exists=========================================')
+        BINARY_MODEL_PATH = '{}/binary-model.h5'.format(BASE_DIR)
+        MULTICLASS_MODEL_PATH = '{}/multiclass-model.h5'.format(BASE_DIR)
 
 def model_from_local():
-    global MODEL_PATH
-    MODEL_PATH = 'models/bin.h5'
+    global BINARY_MODEL_PATH
+    BINARY_MODEL_PATH = 'models/bin.h5'
     
 model_from_drive()
 # Load your trained model
-model = load_model(MODEL_PATH)
+binary_model = load_model(BINARY_MODEL_PATH)
+multiclass_model = load_model(MULTICLASS_MODEL_PATH)
 
 app = Flask(__name__)
 
@@ -73,13 +75,30 @@ def upload():
         file_path = os.path.join(
             basepath, 'upload/', secure_filename(f.filename))
         f.save(file_path)
-        prediction = model_predict(file_path, model)
+        prediction = model_predict(file_path, binary_model)
         if (prediction[0] >=0.5):
             return '+'
         elif (prediction[0]<0.5):
             return '-'
         else:
             return 'None'
+    return None 
+
+CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
+@app.route('/predict/multiclass', methods=['GET', 'POST'])
+def upload():
+    global CLASS_NAMES
+    if request.method == 'POST':
+        f = request.files['file']
+        print('f:\n\n  ',f)
+        basepath = os.path.dirname(__file__)
+        file_path = os.path.join(
+            basepath, 'upload/', secure_filename(f.filename))
+        f.save(file_path)
+        prediction = model_predict(file_path, multiclass_model)
+        predicted_class_indices  = np.argmax(prediction,axis=1)
+        res = CLASS_NAMES[predicted_class_indices[0]]
+        return res
     return None 
 
 @app.errorhandler(NotFound)
