@@ -26,7 +26,7 @@ EXPOSE 8000
 # Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
 # RUN useradd appuser && chown -R appuser /app
 # USER appuser
-RUN echo "changii"
+RUN echo "change"
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ["sh", "entrypoint.sh"]
