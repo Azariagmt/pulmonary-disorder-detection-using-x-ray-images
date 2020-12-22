@@ -104,7 +104,7 @@ def upload():
             return 'None'
     return None 
 
-CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']_
+CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
 @app.route('/predict/multiclass', methods=['GET', 'POST'])
 def upload():
     global CLASS_NAMES
