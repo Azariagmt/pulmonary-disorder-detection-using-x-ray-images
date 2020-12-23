@@ -3,7 +3,8 @@ import os
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import numpy as np
-from modules import load_models, predict
+from modules import load_models
+from modules import predict
 
 app = Flask(__name__)
 

@@ -88,7 +88,6 @@ $(document).ready(function () {
 
     // Make prediction by calling api /predict
     $.ajax({
-      beforeSend: function () {},
       type: "POST",
       url: "/predict/multiclass",
       data: form_data,
@@ -101,7 +100,7 @@ $(document).ready(function () {
         $(".loader-two").hide();
         $("#result-two").fadeIn(600);
         console.log("data:", data);
-        $("#result.two").text(" Result:  " + data);
+        $("#result-two").text(" Result:  " + data);
         console.log("Success!");
       },
     });
