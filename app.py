@@ -12,7 +12,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/predict/binary', methods=['GET', 'POST'])
+@app.route('/binary', methods=['GET', 'POST'])
 def uploadb():
     if request.method == 'POST':
         f = request.files['file']
@@ -32,7 +32,7 @@ def uploadb():
     return None 
 
 CLASS_NAMES = ['Covid 19', 'Pneumonia', 'Tuberculosis']
-@app.route('/predict/multiclass', methods=['GET', 'POST'])
+@app.route('/multiclass', methods=['GET', 'POST'])
 def uploadm():
     global CLASS_NAMES
     if request.method == 'POST':
@@ -64,6 +64,7 @@ def forbidden_handler(e: HTTPException):
 @app.errorhandler(RequestTimeout)
 def request_timeout_handler(e: HTTPException):
     return '<h1>408.html</h1>', 408
+
 
 
 if __name__ == '__main__':

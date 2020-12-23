@@ -62,7 +62,7 @@ $(document).ready(function () {
     $.ajax({
       beforeSend: function () {},
       type: "POST",
-      url: "/predict/binary",
+      url: "/binary",
       data: form_data,
       contentType: false,
       cache: false,
@@ -89,7 +89,7 @@ $(document).ready(function () {
     // Make prediction by calling api /predict
     $.ajax({
       type: "POST",
-      url: "/predict/multiclass",
+      url: "/multiclass",
       data: form_data,
       contentType: false,
       cache: false,
