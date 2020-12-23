@@ -3,8 +3,12 @@ import os
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import numpy as np # Fundamental package for linear algebra and multidimensional arrays
-import tensorflow as tf
+import tensorflow as tf # Deep Learning Tool
 from tensorflow.keras.models import load_model
+from keras import backend as K
+import os # OS module in Python provides a way of using operating system dependent functionality
+import cv2 # Library for image processing
+import shutil
 import gdown
 
 BINARY_MODEL_PATH = ''
@@ -22,8 +26,7 @@ def load_binary_model():
         output = 'binary-model.h5'
         gdown.download(url, output, quiet=False)
         BINARY_MODEL_PATH = '{}/../binary-model.h5'.format(BASE_DIR)
-        print('BINARY MODEL SUCCESS'
-)
+        print('BINARY MODEL SUCCESS')
     else:
         print('Binar model exists=========================================')
         BINARY_MODEL_PATH = '{}/../binary-model.h5'.format(BASE_DIR)
@@ -31,7 +34,6 @@ def load_binary_model():
 
     BINARY_MODEL = load_model(BINARY_MODEL_PATH)
     return BINARY_MODEL
-
 
 def load_multiclass_model():
     global MULTICLASS_MODEL_PATH
@@ -51,3 +53,7 @@ def load_multiclass_model():
 
     MULTICLASS_MODEL = load_model(MULTICLASS_MODEL_PATH)
     return MULTICLASS_MODEL
+
+def model_from_local():
+    global BINARY_MODEL_PATH
+    BINARY_MODEL_PATH = 'models/bin.h5'
