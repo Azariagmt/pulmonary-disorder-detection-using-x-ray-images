@@ -1,7 +1,6 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.8-slim-buster
 
-RUN echo "build"
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -18,6 +17,9 @@ RUN apt-get update
 RUN apt-get -y install libglib2.0-0
 RUN apt install -y libsm6 libxext6
 RUN apt-get install -y libxrender-dev
+RUN python -m pip install --upgrade --force-reinstall setuptools
+
+RUN echo "build"
 
 WORKDIR /app
 COPY . /app
