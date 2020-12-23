@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1
 # Install pip requirements
 COPY requirements.txt .
 # libraries for opencv
-RUN python -m pip install -r requirements.txt
+RUN python -m pip install -r requirement.txt
 RUN python -m pip install googledrivedownloader
 RUN python -m pip install gdown 
 RUN apt-get update
