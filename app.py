@@ -91,7 +91,6 @@ def forbidden_handler(e: HTTPException):
 def request_timeout_handler(e: HTTPException):
     return '<h1>408.html</h1>', 408
 
-
 if __name__ == '__main__':
     os.environ.setdefault('Flask_SETTINGS_MODULE', 'helloworld.settings')
     app.run(debug=True)
