@@ -1,11 +1,11 @@
 {% extends "base.html" %} {% block content %}
 
-
 <div class="col-sm-12 col-md-6 float-left">
-    <h4>Binary classification model</h4>
+    <h5>Binary classification model</h5>
+    <span>Detect between covid + or - images</span>
     <form id="upload-file-one" method="post" enctype="multipart/form-data">
         <label for="imageUploadOne" class="upload-label container">
-            Choose...
+            Upload X-ray image
         </label>
         <input type="file" name="file" id="imageUploadOne" accept=".png, .jpg, .jpeg">
     </form>
@@ -27,10 +27,11 @@
 </div>
 
 <div class="col-sm-12 col-md-6 float-right">
-    <h4>Multiclass classification model</h4>
+    <h5>Multiclass classification model</h5>
+    <span>Detect between covid, Tuberculosis, Bacterial Pneumonia, Viral pneumonia and Normal images</span>
     <form id="upload-file-two" method="post" enctype="multipart/form-data">
         <label for="imageUploadTwo" class="upload-label container">
-            Choose...
+            Upload X-ray image
         </label>
         <input type="file" name="file" id="imageUploadTwo" accept=".png, .jpg, .jpeg">
     </form>

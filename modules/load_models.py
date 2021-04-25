@@ -56,4 +56,5 @@ def load_multiclass_model():
 
 def model_from_local():
     global BINARY_MODEL_PATH
-    BINARY_MODEL_PATH = 'models/bin.h5'
+    BINARY_MODEL_PATH = 'models/covidet.h5'
+    

@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Covid 19 detection</title>
+    <title>Pulmonary disorder detection</title>
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700"> -->
     <link rel="stylesheet" href="../static/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css"> -->
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/js/jquery.min.js"></script>
@@ -22,80 +22,136 @@
         }
 
         div .container {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            padding-top: 1rem;
+        }
+        div span{
+            min-height: 4rem;
+            display: inline-block;
         }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
-        <div class="container"><a class="navbar-brand logo" href="#">Covid 19 detection</a><button
+        <div class="container"><a class="navbar-brand logo" href="#">Pulmonary disorder detection</a><button
                 data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle
                     navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav ml-auto">
-                    <!-- <li class="nav-item"><a class="nav-link"
-                            href="https://www.linkedin.com/in/azaria-gebremichael/">Azaria</a></li> -->
+                    <li class="nav-item"><a class="nav-link"
+                            href="https://www.linkedin.com/in/azaria-gebremichael/">Azaria G Tamrat</a></li>
                 </ul>
             </div>
         </div>
-        <script src="../static/js/main.js"></script>
     </nav>
     <main class="page landing-page">
         <section class="portfolio-block block-intro">
             <div class="container">
                 <!-- <div class="avatar" style="background-image:url(&quot;static/img/avatars/avatar.jpg&quot;);"></div> -->
                 <div class="container">
-                    It is critical to detect the positive cases as early as possible so as to prevent the further spread
-                    of this pandemic and to quickly treat affected patients. The need for auxiliary diagnostic tools has
-                    increased as there are no accurate automated toolkits available.
+                    AI and Machine Learnings use in detecting pulmonary disorders such as Tuberculosis, pneumonia and many others has been a well-known fact for quite a while now. 
+                    When — Coronavirus disease 2019 also known as COVID-19 was declared as a pandemic in 2020 those similar techniques could be used for the diagnosis of COVID-19, 
+                    especially in developing countries where there is lack of specialized physicians, and test kits are in scarce supply. These inadequacies are leading to the 
+                    misdiagnosis of the different pulmonary disorders, more specifically COVID-19. The objective of this project is to provide an overview on the use of Deep neural networks,
+                    both Vanilla neural networks and the use of transfer learning(pretrained models) to present a quick solution to provide a classification between COVID-19, Bacterial Pneumonia, viral Pneumonia,
+                    Tuberculosis, and Normal/Healthy images. In depth description and analysis can be found on the <a href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/readme.md">README.md</a> of the 
+                    <a href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images">
+                        repo</a>.
 
-                    Even with glimpses of hope for a cure countries in Africa(more than 1.2 billion) people dont know
-                    when they'll get it, leaving dark days still ahead.
-
-                    Covid-19 has resulted in countless numbers of lives lost, ruining multiple businesses all over the
-                    world and disrupting the global economy.
-
-                    Recent findings obtained using radiology imaging techniques suggest that such images contain salient
-                    information about the COVID-19 virus. Thus we are here trying to prove that using x-ray images we
-                    can show whether or not someone has covid and the fact that they will be intubated, and go to the
-                    intensive care unit to receive treatment afterwards.
                 </div>
-                <p>
-
-
+            
+                    <div id="try" class="container">
+                        <div id="content" style="margin-top:2em" class="clearfix">{% block content %}{% endblock %}</div>
+                    </div>
+                    <p>
                 <div class="container">
                     <h4>Important Links</h4>
-                    <a
-                        href="https://github.com/Azariagmt/covid19-detection-using-x-ray-images/blob/master/notebooks/binary-classification.ipynb"><b>Link</b></a>
-                    to Binary-classification model notebook <br />
-                    <a
-                        href="https://github.com/Azariagmt/covid19-detection-using-x-ray-images/blob/master/notebooks/multiclass-classification.ipynb"><b>Link</b></a>
-                    to Multiclass-classification model notebook
+               
+                 <div class="row">
 
+                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                         <h5>Notebooks</h5>
+                         <del> 
+                            <a
+                            href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/binary-classification.ipynb"><b>Link</b></a>
+                        to Binary-classification model notebook
+                    </del> <i> !outdated</i>
+                    <br />
+                    <a
+                            href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/Xception.ipynb"><b>Link</b></a>
+                        to Xception multiclass-classification model notebook
+                        <br>
+                        <a
+                        href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/DenseNet201.ipynb"><b>Link</b></a>
+                    to DenseNet201 multiclass-classification model notebook
+                    <br>
+                    <a
+                    href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/ResNet50V2.ipynb"><b>Link</b></a>
+                to ResNet50V2 multiclass-classification model notebook
+                <br>
+
+                        <a
+                            href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/Xception.ipynb"><b>Link</b></a>
+                        to InceptionV3 multiclass-classification model notebook
+                        <br>
+                        <del> 
+                         <a
+                             href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/InceptionV3.ipynb"><b>Link</b></a>
+                         to Multiclass-classification model notebook
+                        </del> <i> !outdated</i>
+                     </div>
+                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                         <h5>Datasets</h5>
+                         <a
+                         href="https://www.kaggle.com/tawsifurrahman/covid19-radiography-database
+                         "><b>Link</b></a>
+                     covid19-radiography-database by Rahman
+                     <br>
+                         <a
+                         href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
+                         "><b>Link</b></a>
+                     Chest X-ray dataset by Paul Mooney
+                     <br>
+                         <a
+                         href="https://www.kaggle.com/tawsifurrahman/tuberculosis-tb-chest-xray-dataset
+                         "><b>Link</b></a>
+                     Tuberculosis Dataset on kaggle
+                     <br>
+                   
+                     <a
+                     href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/Get%20datasets.ipynb"><b>Link</b></a>
+                 to notebook fetching datasets
+                 <br>
+                 <a
+                     href="https://github.com/Azariagmt/pulmonary-disorder-detection-using-x-ray-images/blob/master/notebooks/Data%20preprocessing.ipynb"><b>Link</b></a>
+                 to notebook preprocessing datasets
+                 <br>
+                     </div>
+                 </div>
                 </div>
                 </p>
                 <p>
-                <div class="container">
+                <!-- <div class="container">
                     <h4>other Links</h4>
                     <a href="https://github.com/ieee8023/covid-chestxray-dataset"><b>Link</b></a>
                     covid dataset by @cohen<br />
                     <a href="https://github.com/Azariagmt/covid19-detection-using-x-ray-images"><b>Link</b></a>
                     Github repo
 
-                </div>
-                </p>
-                <div id="try" class="container">
-                    <div id="content" style="margin-top:2em" class="clearfix">{% block content %}{% endblock %}</div>
-                </div>
+                </div> -->
+                </p>            
             </div>
         </section>
     </main>
     <footer class="page-footer">
         <div class="container">
             <div class="links"><a href="#" style="font-size: 17px;">copyright@2020 all rights reserved</a></div>
-            <div class="social-icons"><a href="#"><i class="icon ion-social-github"></i></a><a href="#"><i
-                        class="icon ion-social-twitter"></i></a></div>
+            <div class="social-icons">
+                <a href="https://github.com/Azariagmt"><i class="icon ion-social-github"></i></a>
+                <a href="https://twitter.com/azariagmt"><i class="icon ion-social-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/azaria-gebremichael/"><i class="icon ion-social-linkedin"></i></a>
+            </div>
         </div>
     </footer>
     <script src="../static/bootstrap/js/bootstrap.min.js"></script>
