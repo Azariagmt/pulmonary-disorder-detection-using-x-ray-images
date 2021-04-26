@@ -74,6 +74,18 @@ The datasets utilized in this project are obtained from three publicly available
 
 # Results
 Transfer learning was used in the building of the models, some reaching an accuracy of 98.4% on the dataset collected from the different sources above.
+## classification report
+| Model             |Accuracy        |  Precision   |  Recall  | F1-Score   |  Support  |
+| --------          | -------------- |------------- |--------- | ---------- | ----------|
+| InceptionV3       |     94.3%      |
+| InceptionResNetV2 |     95%        |      97%     |    97%   |     97%    |    300    |
+| <b>DenseNet201    |    98.27%      |      98%     |    98%   |     98%    |    4404   |
+| ResNet50V2        |     95%        |      95%     |    95%   |     95%    |    4404   |
+| ResNet101V2       |     97.12%     |      97%     |    97%   |     97%    |    4404   |
+| VGG16             | 
+| VGG19             |
+| Xception          |      -         |      95%     |    95%   |     95%    |    4404   |
+
 ## Confusion matrix for chosen models
 These are the confusion matrices of tsome of the pretrained models used to build the models.
 ### Xception
