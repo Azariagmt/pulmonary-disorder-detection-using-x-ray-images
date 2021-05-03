@@ -1,0 +1,2 @@
+### Model is being fetched from google drive using gdown package.
+If using Docker look at the Dockerfile to see how models are being fetched. If you are using this app in a non-containerized environment look at at load_models.py to see how models are being fetched.
