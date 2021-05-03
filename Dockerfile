@@ -11,15 +11,17 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 # libraries for opencv
 RUN python -m pip install -r requirements.txt
-RUN python -m pip install googledrivedownloader
-RUN python -m pip install gdown 
+
+# fetch models from drive
+RUN gdown https://drive.google.com/uc?id=1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0 -O ./models/binary-model.h5
+RUN gdown https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt -O ./models/multiclass-model.h5
 RUN apt-get update
-RUN apt-get -y install libglib2.0-0
-RUN apt install -y libsm6 libxext6
-RUN apt-get install -y libxrender-dev
+
+# install required linux dependencies
+RUN apt install -y libglib2.0-0 libsm6 libxext6 libxrender-dev
+
 RUN python -m pip install --upgrade --force-reinstall setuptools
 
-RUN echo "hello"
 WORKDIR /app
 COPY . /app
 

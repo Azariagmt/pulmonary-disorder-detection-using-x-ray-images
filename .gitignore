@@ -1,5 +1,7 @@
 __pycache__/
 *.py[cod]
-models
+model
+models/binary-model.h5
+models/multiclass-model.h5
 binary-model.h5
 multiclass-model.h5
