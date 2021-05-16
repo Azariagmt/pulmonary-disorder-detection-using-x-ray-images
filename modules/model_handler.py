@@ -59,3 +59,9 @@ def get_model(model_type):
     except ValueError as e:
         print(e)
     return factory_obj
+
+
+# to fetch models for docker image
+if __name__ == "main":
+    get_model("binary")
+    get_model("multiclass")
