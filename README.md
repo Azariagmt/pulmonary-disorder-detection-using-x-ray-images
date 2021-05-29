@@ -77,13 +77,15 @@ Transfer learning was used in the building of the models, some reaching an accur
 ## classification report
 | Model             |Accuracy        |  Precision   |  Recall  | F1-Score   |  Support  |
 | --------          | -------------- |------------- |--------- | ---------- | ----------|
-| InceptionV3       |     94.3%      |
-| InceptionResNetV2 |     95%        |      97%     |    97%   |     97%    |    300    |
-| <b>DenseNet201    |    98.27%      |      98%     |    98%   |     98%    |    4404   |
+| InceptionV3       |     97.37%     |      97%     |    97%   |     97%    |    4404   |
+| InceptionResNetV2 |     95.5%      |      97%     |    97%   |     97%    |    300    |
+| <b>DenseNet121    |    98.27%      |      98%     |    98%   |     98%    |    4404   |
+|    DenseNet169    |    98.07%      |      98%     |    98%   |     98%    |    4404   |
+|    DenseNet201    |    98.27%      |      98%     |    98%   |     98%    |    4404   |
 | ResNet50V2        |     95%        |      95%     |    95%   |     95%    |    4404   |
 | ResNet101V2       |     97.12%     |      97%     |    97%   |     97%    |    4404   |
-| VGG16             | 
-| VGG19             |
+| VGG16             |     97.39%     |      96%     |    96%   |     96%    |    4404   |
+| VGG19             |    97.48%      |      97%     |    97%   |     97%    |    4404   |
 | Xception          |      -         |      95%     |    95%   |     95%    |    4404   |
 
 ## Confusion matrix for chosen models
