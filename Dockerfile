@@ -13,8 +13,7 @@ COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
 # fetch models from drive
-RUN gdown https://drive.google.com/uc?id=1Zs3xrGGKIAbq_3uDG5X2Sj6H2sUsPmB0 -O ./models/binary-model.h5
-RUN gdown https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt -O ./models/multiclass-model.h5
+CMD [ "python", "/modules/model_handler.py" ]
 RUN apt-get update
 
 # install required linux dependencies
