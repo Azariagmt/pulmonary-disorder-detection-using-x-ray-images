@@ -8,6 +8,9 @@ import gdown
 
 
 class BinaryModelLoader:
+    """Loads Binary model, if it doesnt exist fetches it from drive URL using gdown
+
+    """
     base_dir = os.path.dirname(os.path.realpath(__file__))
 
     def __init__(self):
@@ -25,11 +28,15 @@ class BinaryModelLoader:
 
 
 class MulticlassModelLoader:
+    """Loads Multiclass model, if it doesnt exist fetches it from drive URL using gdown
+
+    """
     base_dir = os.path.dirname(os.path.realpath(__file__))
 
     def __init__(self):
         if(not os.path.exists('{}/../models/multiclass-model.h5'.format(self.base_dir))):
-            url = 'https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt'
+            # https://drive.google.com/file/d/1ZMLUlZYkDhDTlUMG9IBgKPPWaBTNw138/view?usp=sharing
+            url = 'https://drive.google.com/uc?id=1ZMLUlZYkDhDTlUMG9IBgKPPWaBTNw138'
             output = '{}/../models/multiclass-model.h5'.format(self.base_dir)
             gdown.download(url, output, quiet=False)
         self.path = '{}/../models/multiclass-model.h5'.format(
@@ -40,7 +47,18 @@ class MulticlassModelLoader:
     def fetched_model(self):
         return self.model
 
-def model_loading_factory(model_type):
+def model_loading_factory(model_type:str):
+    """Factory method loading model
+
+    Args:
+        model_type (str): binary or multiclass
+
+    Raises:
+        ValueError: If it can not get loaded model(neither binary or multiclass)
+
+    Returns:
+        tensorflow.keras.models: fetched keras models
+    """
     if model_type == "binary":
         loader = BinaryModelLoader()
     elif model_type == "multiclass":
@@ -52,7 +70,15 @@ def model_loading_factory(model_type):
 
 
 #wrapper for model_loading_factory
-def get_model(model_type):
+def get_model(model_type:str):
+    """Wrapper for the model loading factory method
+
+    Args:
+        model_type (str): Type of model to load(binary or multiclass)
+
+    Returns:
+        Factory object: Factory to load model
+    """
     factory_obj = None
     try:
         factory_obj = model_loading_factory(model_type)
