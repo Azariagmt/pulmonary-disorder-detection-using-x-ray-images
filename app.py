@@ -15,6 +15,11 @@ def index():
 
 @app.route('/binary', methods=['GET', 'POST'])
 def predict_binary():
+    """Function predicting binary model
+
+    Returns:
+        result (string): + or - depending on probability someone has covid or not
+    """
     if request.method == 'POST':
         binary_model = model_handler.get_model("binary")
         prediction = predict.model_predict(
@@ -30,6 +35,11 @@ CLASS_NAMES = ['Covid 19', 'Bacterial Pneumonia',
 
 @app.route('/multiclass', methods=['GET', 'POST'])
 def predict_multiclass():
+    """function predicting multiclass model
+
+    Returns:
+        result: the classname of the highest predicted index using argmax
+    """
     global CLASS_NAMES
     if request.method == 'POST':
         multiclass_model = model_handler.get_model("multiclass")
