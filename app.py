@@ -1,11 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import os
 import numpy as np
+import pandas as pd
 from modules import model_handler, predict, image_processing
-
+import json
 
 app = Flask(__name__)
 
@@ -45,11 +46,30 @@ def predict_multiclass():
         multiclass_model = model_handler.get_model("multiclass")
         multiclass_prediction = predict.model_predict(
             image_processing.get_image(), multiclass_model)
+        
         predicted_class_indices = np.argmax(multiclass_prediction, axis=1)
         result = CLASS_NAMES[predicted_class_indices[0]]
         return result
     return None
 
+
+@app.route("/api/multiclass", methods=['GET', 'POST'])
+def multiclass_api():
+    """API for predicting multiclass model
+
+    Returns:
+        result: Array containing prediction value for each class
+    """
+    global CLASS_NAMES
+    if request.method == 'POST':
+        img_path = request.get_json()['url']
+        multiclass_model = model_handler.get_model("multiclass")
+        multiclass_prediction = predict.model_predict(
+            img_path, multiclass_model)
+        print(multiclass_prediction)
+
+        return pd.Series(multiclass_prediction[0]).to_json(orient='values')
+    return None
 
 @app.errorhandler(NotFound)
 def page_not_found_handler(e: HTTPException):
