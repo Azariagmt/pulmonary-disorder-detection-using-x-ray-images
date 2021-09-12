@@ -35,7 +35,8 @@ class MulticlassModelLoader:
 
     def __init__(self):
         if(not os.path.exists('{}/../models/multiclass-model.h5'.format(self.base_dir))):
-            url = 'https://drive.google.com/uc?id=1LUJK_QVdWuZzJeOdsfg5R3F_OXLKt3rt'
+            # https://drive.google.com/file/d/1ZMLUlZYkDhDTlUMG9IBgKPPWaBTNw138/view?usp=sharing
+            url = 'https://drive.google.com/uc?id=1ZMLUlZYkDhDTlUMG9IBgKPPWaBTNw138'
             output = '{}/../models/multiclass-model.h5'.format(self.base_dir)
             gdown.download(url, output, quiet=False)
         self.path = '{}/../models/multiclass-model.h5'.format(
