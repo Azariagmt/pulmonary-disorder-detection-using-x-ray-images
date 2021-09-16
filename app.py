@@ -7,8 +7,11 @@ import numpy as np
 import pandas as pd
 from modules import model_handler, predict, image_processing
 import json
+# from flask import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
@@ -56,13 +59,18 @@ def predict_multiclass():
 @app.route("/api/multiclass", methods=['GET', 'POST'])
 def multiclass_api():
     """API for predicting multiclass model
-
+    Recieves POST request with URL containing json content in body
+    Example:
+        {
+        "url":"https://someimg.png"
+        }
     Returns:
         result: Array containing prediction value for each class
     """
     global CLASS_NAMES
     if request.method == 'POST':
         img_path = request.get_json()['url']
+        print("IMAGE PATH=============", img_path)
         multiclass_model = model_handler.get_model("multiclass")
         multiclass_prediction = predict.model_predict(
             img_path, multiclass_model)
