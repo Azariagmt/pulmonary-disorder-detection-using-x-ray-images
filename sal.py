@@ -68,7 +68,8 @@ def saliency(img_path, multiclass_model, name):
     if (not os.path.isdir(img_dir)):
         os.mkdir(img_dir)
 
-    plt.savefig(f'./static/img/saliency/{name}.svg', transparent=True)
+    plt.tight_layout()
+    plt.savefig(f'./static/img/saliency/{name}.svg', transparent=True, bbox_inches='tight', pad_inches=0)
     plt.close()
 
     return "Done"
