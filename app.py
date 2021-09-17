@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, Response
+from copy import Error
+from sal import saliency
+from flask import Flask, render_template, request, Response, copy_current_request_context
 from werkzeug.exceptions import Forbidden, HTTPException, NotFound, RequestTimeout, Unauthorized
 import tensorflow as tf
 from tensorflow.keras.models import load_model
@@ -56,6 +58,7 @@ def predict_multiclass():
     return None
 
 
+
 @app.route("/api/multiclass", methods=['GET', 'POST'])
 def multiclass_api():
     """API for predicting multiclass model
@@ -68,15 +71,29 @@ def multiclass_api():
         result: Array containing prediction value for each class
     """
     global CLASS_NAMES
-    if request.method == 'POST':
+    if request.method == "POST":
         img_path = request.get_json()['url']
         print("IMAGE PATH=============", img_path)
         multiclass_model = model_handler.get_model("multiclass")
         multiclass_prediction = predict.model_predict(
             img_path, multiclass_model)
         print(multiclass_prediction)
+        # @copy_current_request_context
+        import datetime
 
-        return pd.Series(multiclass_prediction[0]).to_json(orient='values')
+        datetime_object = datetime.datetime.now()
+        def saliency_generation(multiclass_model):
+            import sal
+            sal.saliency(img_path=img_path, multiclass_model=multiclass_model, name=datetime_object)
+        
+        saliency_generation(multiclass_model=multiclass_model)
+        # import threading
+        # threading.Thread(target=saliency_generation).start()
+
+        return {
+            "prediction": pd.Series(multiclass_prediction[0]).to_json(orient='values'),
+            "saliency": f"/static/img/saliency/{datetime_object}.png"
+            }
     return None
 
 @app.errorhandler(NotFound)
