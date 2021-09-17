@@ -31,8 +31,6 @@ def preprocess_image(img_path):
     img_array = np.stack((img_array,)*3, axis=-1)
     img_array = np.expand_dims(img_array, axis=0)
     print('Image array shape: ', img_array.shape)
-    # img_array = np.array(img_array)
-    print('predicted on Array :', img_array)
     return img_array
 
 def model_predict(img_path, model):
