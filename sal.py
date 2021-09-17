@@ -63,8 +63,12 @@ def saliency(img_path, multiclass_model, name):
     plt.figure(figsize=(8,8))
     plt.imshow(saliency_map[0], cmap='jet', alpha=0.9)
     plt.axis('off')
+    import os
+    img_dir = './static/img/saliency'
+    if (not os.path.isdir(img_dir)):
+        os.mkdir(img_dir)
 
-    plt.savefig(f'./static/img/saliency/{name}.png', transparent=True)
+    plt.savefig(f'./static/img/saliency/{name}.svg', transparent=True)
     plt.close()
 
     return "Done"
