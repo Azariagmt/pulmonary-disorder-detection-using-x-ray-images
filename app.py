@@ -92,7 +92,7 @@ def multiclass_api():
 
         return {
             "prediction": pd.Series(multiclass_prediction[0]).to_json(orient='values'),
-            "saliency": f"/static/img/saliency/{datetime_object}.png"
+            "saliency": f"/static/img/saliency/{datetime_object}.svg"
             }
     return None
 
