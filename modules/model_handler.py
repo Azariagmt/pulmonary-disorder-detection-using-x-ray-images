@@ -34,12 +34,12 @@ class MulticlassModelLoader:
     base_dir = os.path.dirname(os.path.realpath(__file__))
 
     def __init__(self):
-        if(not os.path.exists('{}/../models/multiclass-model.h5'.format(self.base_dir))):
+        if(not os.path.exists('{}/../models/MobileNet.h5'.format(self.base_dir))):
             # https://drive.google.com/file/d/1ZMLUlZYkDhDTlUMG9IBgKPPWaBTNw138/view?usp=sharing
             url = 'https://drive.google.com/uc?id=1ZMLUlZYkDhDTlUMG9IBgKPPWaBTNw138'
-            output = '{}/../models/multiclass-model.h5'.format(self.base_dir)
+            output = '{}/../models/MobileNet.h5'.format(self.base_dir)
             gdown.download(url, output, quiet=False)
-        self.path = '{}/../models/multiclass-model.h5'.format(
+        self.path = '{}/../models/MobileNet.h5'.format(
             MulticlassModelLoader.base_dir)
         self.model = load_model(self.path)
 
