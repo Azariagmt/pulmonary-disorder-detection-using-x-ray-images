@@ -118,4 +118,7 @@ def request_timeout_handler(e: HTTPException):
 
 if __name__ == '__main__':
     os.environ.setdefault('Flask_SETTINGS_MODULE', 'helloworld.settings')
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    port = int(os.environ.get("PORT", 33507))
     app.run(debug=True)
