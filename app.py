@@ -94,6 +94,8 @@ def multiclass_api():
             "prediction": pd.Series(multiclass_prediction[0]).to_json(orient='values'),
             "saliency": f"/static/img/saliency/{datetime_object}.svg"
             }
+    elif request.method == "GET":
+        return "invalid request"
     return None
 
 @app.errorhandler(NotFound)
